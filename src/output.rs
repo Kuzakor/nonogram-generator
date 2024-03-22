@@ -10,5 +10,5 @@ pub fn output(img: &DynamicImage, output_path: &str) -> Result<(), Box<dyn Error
     fs::create_dir_all(dir)?;
     img.save(output_path)?;
 
-    return Ok(());
+    Ok(())
 }

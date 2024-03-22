@@ -1,23 +1,11 @@
 use image::{Pixel, Rgba};
 
-pub fn closest_rgb(color_list: &Vec<Rgba<u8>>, pixel: &Rgba<u8>, debug: bool) -> usize {
+pub fn closest_rgb(color_list: &Vec<Rgba<u8>>, pixel: &Rgba<u8>) -> usize {
     let mut closest_index = 0;
-    let mut closest_diff = rgba_diff(&color_list.get(closest_index).unwrap(), &pixel);
+    let mut closest_diff = rgba_diff(color_list.get(closest_index).unwrap(), pixel);
 
     for color_index in 1..color_list.len() {
-        let color_diff = rgba_diff(&color_list.get(color_index).unwrap(), &pixel);
-
-        if debug {
-            println!(
-                "closest_rgb -- [{:?}][closest_diff = {}] {:?} v {:?} [color_diff = {}]",
-                color_list.get(closest_index).unwrap(),
-                closest_diff,
-                &color_list.get(color_index).unwrap(),
-                &pixel,
-                color_diff
-            );
-        }
-
+        let color_diff = rgba_diff(color_list.get(color_index).unwrap(), pixel);
         if color_diff < closest_diff {
             closest_diff = color_diff;
             closest_index = color_index;
@@ -25,7 +13,7 @@ pub fn closest_rgb(color_list: &Vec<Rgba<u8>>, pixel: &Rgba<u8>, debug: bool) ->
     }
 
     // println!("closest_rgb -- {} :: {}", closest_index, closest_diff);
-    return closest_index;
+    closest_index
 }
 
 fn rgba_diff(pixel_1: &Rgba<u8>, pixel_2: &Rgba<u8>) -> u32 {
@@ -54,5 +42,5 @@ fn rgba_diff(pixel_1: &Rgba<u8>, pixel_2: &Rgba<u8>) -> u32 {
         }
     }
 
-    return 0;
+    0
 }

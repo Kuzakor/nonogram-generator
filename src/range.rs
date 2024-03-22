@@ -5,5 +5,5 @@ pub fn range(start: u32, end: u32) -> Box<dyn Iterator<Item = u32>> {
         return Box::new((end..start).rev());
     }
 
-    return Box::new(start..end);
+    Box::new(start..end)
 }
